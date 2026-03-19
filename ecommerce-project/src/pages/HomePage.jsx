@@ -1,27 +1,7 @@
 import './HomePage.css'
-import { useEffect, useState } from 'react'
 import { Header } from '../components/header.jsx'
 import { Product } from '../components/product.jsx'
-import axios from 'axios'
-export function HomePage() {
-    const [prodcuts,setProdcuts] = useState([]);
-    const [cart,setCart] = useState([]);
-
-    useEffect(()=>{
-        axios.get('/api/products')
-            .then((response)=>{
-                setProdcuts(response.data)
-            })
-        }
-    ,[]);
-
-    useEffect(()=>{
-        axios.get('/api/cart-items')
-            .then((response)=>{
-                setCart(response.data)
-            })
-        }
-    ,[]);
+export function HomePage({prodcuts,cart}) {
 
     return (
         <>

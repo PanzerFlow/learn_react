@@ -1,5 +1,4 @@
-import { Link } from 'react-router'
-
+import { formatMoney } from '../utils/money'
 export function Product(product) { //shortcut
     const id = product.id
     const image = product.image
@@ -7,7 +6,7 @@ export function Product(product) { //shortcut
     const rating = product.rating
     const ratingImage = `images/ratings/rating-${rating.stars*10}.png`
     const priceCents = product.priceCents
-    const price = (Math.round(priceCents) / 100).toFixed(2)
+    const price = formatMoney(priceCents)
 
     return (
         <div key={id} className="product-container">
