@@ -4,7 +4,7 @@ Done the course
 
 # React
 https://www.youtube.com/watch?v=TtPXvEcE11E
-4:56 proper react setup
+6:10 
 
 https://www.youtube.com/watch?v=SqcY0GlETPk&pp=ugUEEgJlbg%3D%3D
 
