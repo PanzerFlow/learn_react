@@ -1,8 +1,22 @@
 import './CheckoutPageHeader.css'
 import './CheckoutPage.css'
 import { CartItem } from '../components/cartItem.jsx'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
+
 
 export function CheckoutPage({ cart }) {
+    const [deliveryOptions, setDeliveryOptions] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/delivery-options?estimatedDeliveryTime')
+            .then((response) => {
+                setDeliveryOptions(response.data)
+            })
+    }
+        , []);
+
     return (
         <>
             <title>Checkout</title>
@@ -33,12 +47,19 @@ export function CheckoutPage({ cart }) {
                 <div className="checkout-grid">
                     <div className="order-summary">
                         {cart.map((cartItem) => {
+                            const selectedDeliveryOption = deliveryOptions
+                                .find((deliveryOption)=>{
+                                    return deliveryOption.id === cartItem.deliveryOptionId
+                                });
                             return (
                                 <CartItem
                                     key={cartItem.id}
                                     id={cartItem.id}
                                     quantity={cartItem.quantity}
                                     product={cartItem.product}
+                                    deliveryOptionId={cartItem.deliveryOptionId}
+                                    deliveryOptions={deliveryOptions}
+                                    selectedDeliveryOption={selectedDeliveryOption}
                                 />
                             )
                         }
