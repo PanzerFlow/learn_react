@@ -5,11 +5,20 @@ import { Product } from '../components/product.jsx'
 import axios from 'axios'
 export function HomePage() {
     const [prodcuts,setProdcuts] = useState([]);
+    const [cart,setCart] = useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:3000/api/products')
+        axios.get('/api/products')
             .then((response)=>{
                 setProdcuts(response.data)
+            })
+        }
+    ,[]);
+
+    useEffect(()=>{
+        axios.get('/api/cart-items')
+            .then((response)=>{
+                setCart(response.data)
             })
         }
     ,[]);
@@ -18,7 +27,7 @@ export function HomePage() {
         <>
             <title>ECommerce Project</title>
 
-            <Header />
+            <Header cart={cart} />
 
             <div className="home-page">
                 <div className="products-grid">
